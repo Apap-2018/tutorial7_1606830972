@@ -1,6 +1,9 @@
 package com.apap.tutorial4.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,8 +46,14 @@ public class DealerController {
 	
 	@RequestMapping(value = "/dealer/view", method = RequestMethod.GET)
 	private String viewDealer(String dealerId, Model model) {
-		DealerModel dealer = dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
-		
+		DealerModel dealer = null;
+		List<CarModel> listCar = null;
+		if(dealerService.getDealerDetailById(Long.parseLong(dealerId)).isPresent()) {
+			dealer = dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
+			listCar = dealer.getListCar();
+			Collections.sort(listCar, comparePrice);
+		}
+		model.addAttribute("listCar", listCar);
 		model.addAttribute("deal", dealer);
 		model.addAttribute("dealId", dealerId);
 		return "view-dealer";
@@ -78,9 +87,9 @@ public class DealerController {
 		return "update-dealer";
 	}
 	
-	@RequestMapping(value="/dealer/update", method = RequestMethod.POST)
-	private String update(String alamat, String noTelp, DealerModel deal) {
-		dealerService.updateDealer(deal, alamat, noTelp);
+	@RequestMapping(value="/dealer/update/{dealerId}", method = RequestMethod.POST)
+	private String update(@PathVariable(value="dealerId") Long dealerId, @ModelAttribute Optional<DealerModel> deal) {
+		dealerService.updateDealer(deal, dealerId);
 		return "update";
 	}
 	
@@ -92,4 +101,12 @@ public class DealerController {
 		return "view-all-dealer";
 	}
 
+	CarModel car;
+	public static Comparator<CarModel> comparePrice = new Comparator<CarModel>() {
+		public int compare(CarModel o1, CarModel o2) {
+			Long price1 = o1.getPrice();
+			Long price2 = o2.getPrice();
+			return price1.compareTo(price2);
+		}
+	};
 }

@@ -7,9 +7,7 @@
 		<h2>Hello!</h2>
 		
 		<h3>Ubah Dealer</h3>
-		<!-- <form th:action="@{/dealer/update}" th:object="${deal}" method="POST"> -->
-		<form th:action="@{/dealer/update}" method="POST">
-			<input type="hidden" th:object="${deal}"/>
+		<form th:action="@{/dealer/update/{dealerId}(dealerId=${deal.id})}" th:object="${deal}" method="POST">
 			Alamat: <br>
 			<input type="text" name="alamat" />
 			<br>

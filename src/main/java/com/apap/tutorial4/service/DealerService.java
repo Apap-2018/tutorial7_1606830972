@@ -11,7 +11,7 @@ public interface DealerService {
 	
 	void deleteDealer(DealerModel dealer);
 	
-	void updateDealer(DealerModel dealer, String alamat, String noTelp);
+	void updateDealer(Optional<DealerModel> dealer, Long dealerId);
 
 	void sortCar(DealerModel dealer);
 	
