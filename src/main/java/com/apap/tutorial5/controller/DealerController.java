@@ -28,13 +28,15 @@ public class DealerController {
 	private CarService carService;
 	
 	@RequestMapping("/")
-	private String home() {
+	private String home(Model model) {
+		model.addAttribute("title", "Home");
 		return "home";
 	}
 	
 	@RequestMapping(value = "/dealer/add", method = RequestMethod.GET)
 	private String add (Model model) {
 		model.addAttribute("dealer", new DealerModel());
+		model.addAttribute("title", "Add Dealer");
 		return "addDealer";
 	}
 	
@@ -56,6 +58,7 @@ public class DealerController {
 		model.addAttribute("listCar", listCar);
 		model.addAttribute("deal", dealer);
 		model.addAttribute("dealId", dealerId);
+		model.addAttribute("title", "View Dealer");
 		return "view-dealer";
 	}
 	
@@ -84,6 +87,7 @@ public class DealerController {
 	private String updateDealer(@PathVariable(value="dealerId") Long dealerId, Model model) {
 		DealerModel dealer = dealerService.getDealerDetailById(dealerId).get();
 		model.addAttribute("deal", dealer);
+		model.addAttribute("title", "Update Dealer");
 		return "update-dealer";
 	}
 	
@@ -99,7 +103,7 @@ public class DealerController {
 	@RequestMapping(value="/dealer/view-all", method= RequestMethod.GET)
 	private String viewAllCar(Model model) {
 		List<DealerModel> listDealer = dealerService.getAllDealer();
-		
+		model.addAttribute("title", "View All Dealer");
 		model.addAttribute("listDealer", listDealer);
 		return "view-all-dealer";
 	}

@@ -1,0 +1,3 @@
+Thymeleaf include digunakan saat fragmentasi. Dimana saat ada tag yang menggunakan include, fragment yang dituju akan diletakkan didalam tag tersebut
+
+Thymeleaf replace digunakan untuk menggantikan konten disuatu tag dengan konten yang akan diganti
