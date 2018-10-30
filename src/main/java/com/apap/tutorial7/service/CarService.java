@@ -1,10 +1,10 @@
-package com.apap.tutorial5.service;
+package com.apap.tutorial7.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.apap.tutorial5.model.CarModel;
-import com.apap.tutorial5.model.DealerModel;
+import com.apap.tutorial7.model.CarModel;
+import com.apap.tutorial7.model.DealerModel;
 public interface CarService {
 	void addCar(CarModel car);
 

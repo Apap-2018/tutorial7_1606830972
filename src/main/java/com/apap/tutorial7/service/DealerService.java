@@ -1,18 +1,18 @@
-package com.apap.tutorial5.service;
+package com.apap.tutorial7.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.apap.tutorial5.model.DealerModel;
+import com.apap.tutorial7.model.DealerModel;
 
 public interface DealerService {
 	Optional<DealerModel> getDealerDetailById(Long id);
 	
-	void addDealer(DealerModel dealer);
+	DealerModel addDealer(DealerModel dealer);
 	
 	void deleteDealer(DealerModel dealer);
 	
-	void updateDealer(Optional<DealerModel> dealer, Long dealerId);
+	void updateDealer(DealerModel dealer, Long dealerId);
 
 	void sortCar(DealerModel dealer);
 	

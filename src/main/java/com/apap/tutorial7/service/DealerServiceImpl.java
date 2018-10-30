@@ -1,4 +1,4 @@
-package com.apap.tutorial5.service;
+package com.apap.tutorial7.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,8 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apap.tutorial5.model.DealerModel;
-import com.apap.tutorial5.repository.DealerDb;
+import com.apap.tutorial7.model.DealerModel;
+import com.apap.tutorial7.repository.DealerDb;
 
 @Service
 @Transactional
@@ -23,8 +23,9 @@ public class DealerServiceImpl implements DealerService{
 	}
 	
 	@Override
-	public void addDealer(DealerModel dealer) {
+	public DealerModel addDealer(DealerModel dealer) {
 		dealerDb.save(dealer);
+		return dealer;
 	}
 
 	@Override
@@ -34,10 +35,10 @@ public class DealerServiceImpl implements DealerService{
 	}
 
 	@Override
-	public void updateDealer(Optional<DealerModel> dealer, Long dealerId) {
+	public void updateDealer(DealerModel dealer, Long dealerId) {
 		DealerModel dealerUpdt = dealerDb.getOne(dealerId);
-		dealerUpdt.setAlamat(dealer.get().getAlamat());
-		dealerUpdt.setNoTelp(dealer.get().getNoTelp());;
+		dealerUpdt.setAlamat(dealer.getAlamat());
+		dealerUpdt.setNoTelp(dealer.getNoTelp());;
 		dealerDb.save(dealerUpdt);
 	}
 

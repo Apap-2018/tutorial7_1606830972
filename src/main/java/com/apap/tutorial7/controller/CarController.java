@@ -1,4 +1,4 @@
-package com.apap.tutorial5.controller;
+package com.apap.tutorial7.controller;
 
 import java.util.ArrayList;
 
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.apap.tutorial5.model.CarModel;
-import com.apap.tutorial5.model.DealerModel;
-import com.apap.tutorial5.service.CarService;
-import com.apap.tutorial5.service.DealerService;
+import com.apap.tutorial7.model.CarModel;
+import com.apap.tutorial7.model.DealerModel;
+import com.apap.tutorial7.service.CarService;
+import com.apap.tutorial7.service.DealerService;
 
 @Controller
 public class CarController {
