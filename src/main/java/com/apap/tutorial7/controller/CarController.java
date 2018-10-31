@@ -38,38 +38,60 @@ public class CarController {
 	@PutMapping(value="/{carId}")
 	private String updateCarSubmit(@PathVariable(value="carId") long carId, @RequestParam("brand") String brand, @RequestParam("type") String type, @RequestParam("price") String price, @RequestParam("amount") String amount, @RequestParam("dealerId") String dealerId) {
 		CarModel car = (CarModel) carService.getCarDetailById(carId).get();
-		DealerModel dealer = (DealerModel) dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
+		
 		if(car.equals(null)) {
 			return "Can't find your car";
 		}
-		car.setAmount(Integer.parseInt(amount));
-		car.setBrand(brand);
-		car.setDealer(dealer);
-		car.setId(carId);
-		car.setPrice(Long.parseLong(price));
-		car.setType(type);
+		if(brand != null) {
+			car.setBrand(brand);
+		}
+		if (type!= null) {
+			car.setType(type);
+		}
+		if (price!=null) {
+			car.setPrice(Long.parseLong(price));
+		}
+		if(amount!=null) {
+			car.setAmount(Integer.parseInt(amount));
+		}
+		if (dealerId!=null) {
+			DealerModel dealer = (DealerModel) dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
+			car.setDealer(dealer);
+		}
+//		car.setAmount(Integer.parseInt(amount));
+//		car.setBrand(brand);
+//		car.setDealer(dealer);
+//		car.setId(carId);
+//		car.setPrice(Long.parseLong(price));
+//		car.setType(type);
 		carService.updateCar(carId, car);
 		return "car update success";
 	}
 	
 	@GetMapping(value="/{carId}")
 	private CarModel viewCar(@PathVariable("carId") long carId) {
-		return carService.getCarDetailById(carId).get();
+		CarModel car = carService.getCarDetailById(carId).get();
+		car.setDealer(null);
+		return car;
 	}
 	
 	@GetMapping()
 	private List<CarModel> viewAllCar(){
-		return carService.getAllCar();
+		List<CarModel> listCar = carService.getAllCar();
+		for(CarModel car : listCar) {
+			car.setDealer(null);
+		}
+		return listCar;
 	}
 	
-	@DeleteMapping(value="/delete")
-	private String deleteCar(@RequestParam("carId") long carId) {
+	@DeleteMapping(value="/{carId}")
+	private String deleteCar(@PathVariable("carId") long carId) {
 		CarModel car = carService.getCarDetailById(carId).get();
 		carService.deleteCar(car);
 		return "car has been deleted";
 	}
 	
-	@PostMapping(value="/add")
+	@PostMapping()
 	private CarModel addCarSubmit(@RequestBody CarModel car) {
 		return carService.addCar(car);
 	}
