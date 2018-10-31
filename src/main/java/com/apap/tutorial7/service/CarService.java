@@ -6,11 +6,13 @@ import java.util.Optional;
 import com.apap.tutorial7.model.CarModel;
 import com.apap.tutorial7.model.DealerModel;
 public interface CarService {
-	void addCar(CarModel car);
+	CarModel addCar(CarModel car);
 
 	void deleteCar(CarModel car);
 	
 	Optional<CarModel> getCarDetailById(Long id);
 	
 	void updateCar(long id, CarModel newCar);
+	
+	List<CarModel> getAllCar();
 }

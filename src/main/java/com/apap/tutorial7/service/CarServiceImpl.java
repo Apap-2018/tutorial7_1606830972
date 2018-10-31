@@ -1,5 +1,6 @@
 package com.apap.tutorial7.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ public class CarServiceImpl implements CarService{
 	private CarDb carDb;
 	
 	@Override
-	public void addCar(CarModel car) {
+	public CarModel addCar(CarModel car) {
 		carDb.save(car);
+		return car;
 	}
 	
 	@Override
@@ -40,6 +42,12 @@ public class CarServiceImpl implements CarService{
 		carUpdated.setPrice(newCar.getPrice());
 		carUpdated.setType(newCar.getType());
 		carDb.save(carUpdated);
+	}
+
+	@Override
+	public List<CarModel> getAllCar() {
+		// TODO Auto-generated method stub
+		return carDb.findAll();
 	}
 
 }

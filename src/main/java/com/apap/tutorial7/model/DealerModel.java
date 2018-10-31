@@ -7,6 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "dealer")
 public class DealerModel implements Serializable{
@@ -57,6 +59,7 @@ public class DealerModel implements Serializable{
 	private String noTelp;
 	
 	@OneToMany(mappedBy="dealer", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@JsonIgnore
 	private List<CarModel> listCar;
 	
 	
